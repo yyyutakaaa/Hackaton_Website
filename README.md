@@ -18,7 +18,3 @@ Right now we've got the basic hardware wired up and the core Arduino code workin
 ## The Team
 
 Built by Mehdi Oulad Khlie during Odisee Hackathon 2025.
-
----
-
-*Because who doesn't love solving puzzles under pressure? 🚀*
