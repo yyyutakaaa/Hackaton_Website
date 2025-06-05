@@ -1,44 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cube of Secrets</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="hero">
-    <h1>Cube of Secrets</h1>
-    <p>A Modern Escape Room Experience</p>
-    <button id="start-btn">Start Demo Timer</button>
-    <div id="timer" aria-live="polite">00:00</div>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Cube of Secrets | Arduino Escape Room</title>
+  </head>
+  <body>
+    <header>
+      <nav class="container">
+        <a href="#" class="logo">🧩 Cube of Secrets</a>
+        <ul class="nav-links">
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#components">Components</a></li>
+          <li><a href="#demo">Demo</a></li>
+          <li><a href="#progress">Progress</a></li>
+        </ul>
+      </nav>
+    </header>
 
-  <main>
-    <section>
-      <h2>How It Works</h2>
-      <ol>
-        <li>Press the start button to activate the timer on the 7-segment display.</li>
-        <li>Answer questions on the LCD display. Each answer is a color.</li>
-        <li>Hold the matching color card in front of the color sensor while pressing the corresponding button.</li>
-        <li>Listen to the Morse code number from the buzzer.</li>
-        <li>Enter the numbers using the IR remote in the correct order.</li>
-      </ol>
+    <section class="hero">
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="hero-content">
+        <h1>Cube of Secrets</h1>
+        <p>
+          An Arduino-powered escape room experience combining colors, codes, and
+          technology
+        </p>
+        <a href="#how-it-works" class="cta-button">Discover the Mystery</a>
+      </div>
     </section>
 
-    <section>
-      <h2>Replayability</h2>
-      <p>
-        Five colored buttons allow endless possibilities. Not every button is needed
-        each time, so every game is unique!
-      </p>
-    </section>
-  </main>
+    <main>
+      <section id="how-it-works" class="how-it-works">
+        <div class="container">
+          <h2 class="section-title">How It Works</h2>
+          <div class="steps-grid">
+            <div class="step-card">
+              <div class="step-number">1</div>
+              <h3>Start the Challenge</h3>
+              <p>
+                Press the start button to begin your escape room adventure. A
+                7-segment display will start tracking your time as you work to
+                solve the puzzle.
+              </p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">2</div>
+              <h3>Read the Clues</h3>
+              <p>
+                Questions appear on the LCD display. Each question has a
+                color-based answer that corresponds to the physical colored
+                buttons and cards.
+              </p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">3</div>
+              <h3>Use Color Cards</h3>
+              <p>
+                Hold the matching color card in front of the color sensor while
+                pressing the corresponding button to receive Morse code numbers
+                through the buzzer.
+              </p>
+            </div>
+            <div class="step-card">
+              <div class="step-number">4</div>
+              <h3>Enter the Code</h3>
+              <p>
+                Use the IR remote control to enter the numbers in the correct
+                order determined by the LCD questions. Solve all puzzles to
+                escape!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <footer>
-    <p>&copy; 2024 Cube of Secrets Project</p>
-  </footer>
+      <section id="components" class="components">
+        <div class="container">
+          <h2 class="section-title">Technical Components</h2>
+          <div class="components-grid">
+            <div class="component-card">
+              <div class="component-icon">🔢</div>
+              <h3>7-Segment Display</h3>
+              <p>Tracks elapsed time during the escape room challenge</p>
+            </div>
+            <div class="component-card">
+              <div class="component-icon">📺</div>
+              <h3>LCD Display</h3>
+              <p>Shows questions and clues with color-based answers</p>
+            </div>
+            <div class="component-card">
+              <div class="component-icon">🎨</div>
+              <h3>Color Sensor</h3>
+              <p>Detects color cards when held in front of the sensor</p>
+            </div>
+            <div class="component-card">
+              <div class="component-icon">🔴</div>
+              <h3>5 Colored Buttons</h3>
+              <p>Physical push buttons in different colors for interaction</p>
+            </div>
+            <div class="component-card">
+              <div class="component-icon">🔊</div>
+              <h3>Buzzer</h3>
+              <p>Plays Morse code numbers when correct combinations are used</p>
+            </div>
+            <div class="component-card">
+              <div class="component-icon">📱</div>
+              <h3>IR Remote</h3>
+              <p>Used to input the decoded numbers in the correct sequence</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <section id="demo" class="demo">
+        <div class="container">
+          <h2 class="section-title">Interactive Color Demo</h2>
+          <p>
+            Click on the colored buttons below to see a simulation of the Morse
+            code output!
+          </p>
+
+          <div class="color-buttons">
+            <button
+              class="color-btn red"
+              data-morse="....- "
+              data-number="4"
+            ></button>
+            <button
+              class="color-btn blue"
+              data-morse="...-- "
+              data-number="3"
+            ></button>
+            <button
+              class="color-btn green"
+              data-morse=".---- "
+              data-number="1"
+            ></button>
+            <button
+              class="color-btn yellow"
+              data-morse="..--- "
+              data-number="2"
+            ></button>
+            <button
+              class="color-btn purple"
+              data-morse="..... "
+              data-number="5"
+            ></button>
+          </div>
+
+          <div class="morse-display" id="morseDisplay">
+            Click a color button to see Morse code!
+          </div>
+        </div>
+      </section>
+
+      <section id="progress" class="progress">
+        <div class="container">
+          <h2 class="section-title">Development Progress</h2>
+
+          <div class="progress-item">
+            <h3>Hardware Setup (Complete)</h3>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 100%"></div>
+            </div>
+            <p>
+              Arduino, displays, sensors, and buttons are connected and tested.
+            </p>
+          </div>
+
+          <div class="progress-item">
+            <h3>Color Detection System (In Progress)</h3>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 75%"></div>
+            </div>
+            <p>Color sensor calibration and card recognition functionality.</p>
+          </div>
+
+          <div class="progress-item">
+            <h3>Morse Code Generator (In Progress)</h3>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 60%"></div>
+            </div>
+            <p>Buzzer system for playing Morse code numbers.</p>
+          </div>
+
+          <div class="progress-item">
+            <h3>Question Database (Planned)</h3>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 30%"></div>
+            </div>
+            <p>Creating variety of questions for replayability.</p>
+          </div>
+
+          <div class="progress-item">
+            <h3>IR Remote Integration (Planned)</h3>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 20%"></div>
+            </div>
+            <p>Programming remote control for number input system.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>
+          &copy; 2025 Cube of Secrets Project. Built with Arduino and
+          creativity! 🚀
+        </p>
+      </div>
+    </footer>
+  </body>
   <script src="script.js"></script>
-</body>
 </html>
