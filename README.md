@@ -17,7 +17,7 @@ Right now we've got the basic hardware wired up and the core Arduino code workin
 
 ## The Team
 
-Built by [Your Names] during [Hackathon Name] 2025.
+Built by Mehdi Oulad Khlie during Odisee Hackathon 2025.
 
 ---
 
