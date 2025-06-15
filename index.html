@@ -1,220 +1,480 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Cube of Secrets | Arduino Escape Room</title>
-  </head>
-  <body>
-    <header>
-      <nav class="container">
-        <a href="#" class="logo">🧩 Cube of Secrets</a>
-        <ul class="nav-links">
-          <li><a href="#how-it-works">How It Works</a></li>
-          <li><a href="#components">Components</a></li>
-          <li><a href="#demo">Demo</a></li>
-          <li><a href="#progress">Progress</a></li>
-        </ul>
-      </nav>
-    </header>
+<html lang="nl">
 
-    <section class="hero">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cube of Secrets | Arduino Escape Room - Hackathon Project</title>
+  <meta name="description"
+    content="Arduino-gebaseerde escape room met kleurensensoren, morse code en IR technologie. Hackathon project Groep 25 Odisee.">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <nav class="container">
+      <a href="#" class="logo">🧩 Cube of Secrets</a>
+      <ul class="nav-links">
+        <li><a href="#werking">Werking</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#componenten">Componenten</a></li>
+        <li><a href="#galerij">Galerij</a></li>
+        <li><a href="#team">Team</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="floating-elements">
       <div class="cube"></div>
       <div class="cube"></div>
       <div class="cube"></div>
-      <div class="hero-content">
-        <h1>Cube of Secrets</h1>
-        <p>
-          An Arduino-powered escape room experience combining colors, codes, and
-          technology
-        </p>
-        <a href="#how-it-works" class="cta-button">Discover the Mystery</a>
+    </div>
+    <div class="hero-content">
+      <h1>Cube of Secrets</h1>
+      <p>Een Arduino-gebaseerde escape room ervaring die kleuren, codes en technologie combineert tot een uitdagende
+        puzzel voor teams</p>
+      <a href="#werking" class="cta-button">Ontdek het Mysterie</a>
+    </div>
+  </section>
+
+  <main>
+    <section id="werking" class="section how-it-works">
+      <div class="container">
+        <h2 class="section-title">Hoe het werkt</h2>
+
+        <div class="explanation">
+          <h3>🎮 De Complete Escape Room Ervaring</h3>
+          <p>De <strong>Cube of Secrets</strong> is een innovatieve escape room die fysieke interactie combineert met
+            digitale technologie. Spelers moeten samenwerken om een reeks uitdagingen op te lossen waarbij timing,
+            logisch denken en teamwork essentieel zijn.</p>
+
+          <p>Het spel begint wanneer een speler de <strong>start knop</strong> indrukt. Vanaf dat moment start een
+            7-segment display een nauwkeurige timer die bijhoudt hoeveel tijd het team nodig heeft om alle puzzels op te
+            lossen. Deze tijdsdruk zorgt voor spanning en moedigt efficiënte samenwerking aan.</p>
+
+          <p>Het hart van de uitdaging draait om <strong>kleurherkenning en morse code decodering</strong>. Via het LCD
+            display krijgen spelers vragen over vlaggen van verschillende landen. Elk antwoord correspondeert met een
+            specifieke kleur die overeenkomt met fysieke arcade drukknoppen en bijpassende kleurenkaarten.</p>
+
+          <button class="read-more-btn" onclick="toggleDetails()">Lees meer details</button>
+
+          <div class="expandable-content" id="detailsContent">
+            <div class="step-detail">
+              <h4>⏱️ Stap 1: Spel Initialisatie</h4>
+              <p>Bij het indrukken van de start knop initialiseert het Arduino systeem alle componenten. De 7-segment
+                display begint te tellen, het LCD toont de eerste vraag, en het systeem genereert willekeurige morse
+                code getallen voor elke kleur. Deze randomisatie zorgt ervoor dat elke speelsessie uniek is en dat
+                spelers het spel meerdere keren kunnen spelen zonder dat ze de oplossing onthouden.</p>
+            </div>
+
+            <div class="step-detail">
+              <h4>❓ Stap 2: Vraag-Antwoord Mechanisme</h4>
+              <p>Het LCD display toont vragen over vlaggen van landen zoals "Vlag van Frankrijk?" met een scroll-functie
+                voor lange teksten. Spelers moeten de kleuren van de vlag identificeren en in de juiste volgorde
+                bepalen. Een dedicated knop laat spelers naar de volgende vraag springen, wat strategische keuzes
+                mogelijk maakt over welke vragen ze eerst willen beantwoorden.</p>
+            </div>
+
+            <div class="step-detail">
+              <h4>🎨 Stap 3: Dual-Authentication Systeem</h4>
+              <p>Voor elke kleur moeten spelers een <strong>dubbele authenticatie</strong> uitvoeren: tegelijkertijd de
+                juiste kleurenkaart voor de TCS230 sensor houden EN de overeenkomstige arcade knop indrukken. Dit
+                mechanisme voorkomt dat spelers gewoon willekeurig knoppen indrukken en vereist echte samenwerking
+                tussen teamleden.</p>
+            </div>
+
+            <div class="step-detail">
+              <h4>🔢 Stap 4: Morse Code Generatie</h4>
+              <p>Wanneer de juiste combinatie wordt uitgevoerd, speelt de buzzer een uniek getal in internationale morse
+                code af. Elke kleur heeft een willekeurig gegenereerd getal tussen 0-9. Spelers moeten deze codes
+                decoderen en onthouden. De morse implementatie gebruikt officiële timings: punten duren 250ms, strepen
+                750ms, met correcte pauzes tussen elementen.</p>
+            </div>
+
+            <div class="step-detail">
+              <h4>📱 Stap 5: Finale Code Validatie</h4>
+              <p>Met de IR afstandsbediening voeren spelers de gedecodeerde getallen in. Het systeem valideert niet
+                alleen de getallen zelf, maar houdt ook bij hoeveel correcte getallen zijn ingevoerd. Wanneer alle drie
+                de vereiste getallen correct zijn ingevoerd, activeert het systeem een succes signaal en stopt de timer.
+                De volgorde waarin getallen ingevoerd worden is bepaald door de antwoorden op de LCD vragen.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <main>
-      <section id="how-it-works" class="how-it-works">
-        <div class="container">
-          <h2 class="section-title">How It Works</h2>
-          <div class="steps-grid">
-            <div class="step-card">
-              <div class="step-number">1</div>
-              <h3>Start the Challenge</h3>
-              <p>
-                Press the start button to begin your escape room adventure. A
-                7-segment display will start tracking your time as you work to
-                solve the puzzle.
+    <section id="demo" class="section demo">
+      <div class="container">
+        <h2 class="section-title">Interactieve Morse Code Demo</h2>
+        <p>Probeer hieronder de morse code simulator uit! Klik op de gekleurde knoppen om te zien hoe de echte buzzer
+          zou klinken in het spel.</p>
+
+        <div class="color-buttons">
+          <button class="color-btn red" data-morse="....- " data-number="4" title="Rood - Morse code voor 4"></button>
+          <button class="color-btn blue" data-morse="...-- " data-number="3" title="Blauw - Morse code voor 3"></button>
+          <button class="color-btn green" data-morse=".---- " data-number="1"
+            title="Groen - Morse code voor 1"></button>
+          <button class="color-btn yellow" data-morse="..--- " data-number="2"
+            title="Geel - Morse code voor 2"></button>
+          <button class="color-btn purple" data-morse="..... " data-number="5"
+            title="Paars - Morse code voor 5"></button>
+        </div>
+
+        <div class="morse-display" id="morseDisplay">
+          Klik op een kleur om morse code te zien!
+        </div>
+
+        <div class="demo-explanation">
+          <h3>💡 Morse Code Uitleg</h3>
+          <p>In morse code wordt elk cijfer voorgesteld door een combinatie van punten (.) en strepen (-). Een punt
+            duurt 250ms, een streep 750ms. Tussen elk punt of streep zit een pauze van 350ms, en aan het einde van elk
+            cijfer een pauze van 500ms.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="componenten" class="section components">
+      <div class="container">
+        <h2 class="section-title">Technische Componenten & Specificaties</h2>
+
+        <div class="components-grid">
+          <div class="component-card">
+            <div class="component-icon">📺</div>
+            <h3>16x2 Character LCD Display</h3>
+            <p>Het primaire interface element dat vragen toont en spelers begeleidt door de escape room ervaring</p>
+            <div class="component-details">
+              <h4>Technische Specificaties:</h4>
+              <ul>
+                <li><strong>Pinout:</strong> RS=12, Enable=11, D4=5, D5=4, D6=3, D7=2</li>
+                <li><strong>Protocol:</strong> 4-bit parallel communicatie voor efficiëntie</li>
+                <li><strong>Library:</strong> LiquidCrystal.h (Arduino native)</li>
+                <li><strong>Features:</strong> Custom scroll functie voor teksten langer dan 16 karakters</li>
+                <li><strong>Voeding:</strong> 5V DC, 2mA typisch verbruik</li>
+              </ul>
+              <h4>Implementatie Details:</h4>
+              <p>De <code>scrollTextRight()</code> functie analyseert tekstlengte en past automatisch de weergave aan.
+                Voor teksten korter dan 16 karakters wordt directe weergave gebruikt, voor langere teksten een smooth
+                scroll animatie met 300ms delay tussen frames.</p>
+            </div>
+          </div>
+
+          <div class="component-card">
+            <div class="component-icon">🔢</div>
+            <h3>7-Segment Display Timer</h3>
+            <p>Precise tijdmeting systeem dat de totale speelduur bijhoudt en competitieve elementen toevoegt</p>
+            <div class="component-details">
+              <h4>Technische Specificaties:</h4>
+              <ul>
+                <li><strong>Controle Pin:</strong> Pin 52 (digitaal output voor einde signaal)</li>
+                <li><strong>Functionaliteit:</strong> Automatische start bij begin spel</li>
+                <li><strong>Precisie:</strong> Milliseconde nauwkeurigheid</li>
+                <li><strong>Stop Conditie:</strong> Geactiveerd wanneer alle puzzels opgelost zijn</li>
+              </ul>
+              <h4>Game Design Functie:</h4>
+              <p>De timer creëert urgentie en competitie tussen teams. Het systeem registreert
+                <code>digitalWrite(52, HIGH)</code> wanneer de variabele <code>z == 3</code>, wat betekent dat alle drie
+                vereiste morse codes correct zijn ingevoerd.
               </p>
             </div>
-            <div class="step-card">
-              <div class="step-number">2</div>
-              <h3>Read the Clues</h3>
-              <p>
-                Questions appear on the LCD display. Each question has a
-                color-based answer that corresponds to the physical colored
-                buttons and cards.
+          </div>
+
+          <div class="component-card">
+            <div class="component-icon">🎨</div>
+            <h3>TCS230 RGB Kleurensensor</h3>
+            <p>Geavanceerde kleurdetectie sensor die lichtfrequenties converteert naar digitale RGB waarden</p>
+            <div class="component-details">
+              <h4>Technische Specificaties:</h4>
+              <ul>
+                <li><strong>Pinout:</strong> S0=22, S1=24, S2=26, S3=28, Output=30</li>
+                <li><strong>Technologie:</strong> Fotodiode array met RGB filters</li>
+                <li><strong>Frequentieschaal:</strong> 20% (S0=HIGH, S1=LOW) voor optimale nauwkeurigheid</li>
+                <li><strong>Meetbereik:</strong> Detecteert 5 verschillende kleuren met tolerantiewaarden</li>
+                <li><strong>Detectie Methode:</strong> pulseIn() functie meet frequentie output</li>
+              </ul>
+              <h4>Kalibratie Waarden:</h4>
+              <p>Na uitgebreide testing zijn specifieke RGB ranges bepaald: Blauw (50-80, 35-65, 25-45), Rood (20-50,
+                35-70, 40-60), Groen (40-60, 30-50, 35-55), Geel (10-35, 15-40, 30-50), Wit (&lt;25, &lt;25, &lt;25).
+                Deze waarden compenseren voor omgevingslicht en materiaal reflectie.</p>
+            </div>
+          </div>
+
+          <div class="component-card">
+            <div class="component-icon">🔴</div>
+            <h3>Arcade Button Interface</h3>
+            <p>Professionele arcade-style drukknoppen met ingebouwde verlichting voor tactile feedback</p>
+            <div class="component-details">
+              <h4>Technische Specificaties:</h4>
+              <ul>
+                <li><strong>Kleur Mapping:</strong> Rood (A1), Groen (A4), Geel (A2), Blauw (A0), Wit (A3)</li>
+                <li><strong>Aanvullende Knoppen:</strong> Start knop (A7), Volgende vraag knop</li>
+                <li><strong>Input Type:</strong> Analoge pinnen gebruikt als digitale inputs</li>
+                <li><strong>Pull-up Configuratie:</strong> Interne pull-up resistors geactiveerd</li>
+                <li><strong>Debouncing:</strong> Software filtering voor stabiele input</li>
+              </ul>
+              <h4>Logica Implementatie:</h4>
+              <p>Elke knop vereist drie condities: <code>digitalRead(knop) == HIGH</code> (fysieke druk),
+                <code>detectColor() == "Kleur"</code> (sensor match), en
+                <code>KleurInAntwoord("Kleur", antwoorden)</code> (validatie tegen huidige vraag). Deze triple-check
+                voorkomt false positives.
               </p>
             </div>
-            <div class="step-card">
-              <div class="step-number">3</div>
-              <h3>Use Color Cards</h3>
-              <p>
-                Hold the matching color card in front of the color sensor while
-                pressing the corresponding button to receive Morse code numbers
-                through the buzzer.
+          </div>
+
+          <div class="component-card">
+            <div class="component-icon">🔊</div>
+            <h3>Morse Code Audio System</h3>
+            <p>Precisie buzzer systeem dat internationale morse code standaarden implementeert</p>
+            <div class="component-details">
+              <h4>Technische Specificaties:</h4>
+              <ul>
+                <li><strong>Pin Assignment:</strong> Pin 9 (PWM capable voor tone generatie)</li>
+                <li><strong>Frequentie:</strong> 1000Hz carrier wave voor optimale hoorbaarheid</li>
+                <li><strong>Timing Standaarden:</strong> DOT=250ms, DASH=750ms, DSPACE=350ms, LSPACE=500ms</li>
+                <li><strong>Implementatie:</strong> Function pointer array voor efficiënte code organisatie</li>
+              </ul>
+              <h4>Morse Code Mapping:</h4>
+              <p>Volledig cijfer set 0-9 geïmplementeerd volgens ITU-R M.1677-1 standaard. Elke morse functie (morse_0
+                tot morse_9) gebruikt de gedefinieerde timing constanten voor consistente audio output. De
+                <code>morseGetallen[]</code> array gebruikt function pointers voor directe indexing.
               </p>
             </div>
-            <div class="step-card">
-              <div class="step-number">4</div>
-              <h3>Enter the Code</h3>
-              <p>
-                Use the IR remote control to enter the numbers in the correct
-                order determined by the LCD questions. Solve all puzzles to
-                escape!
-              </p>
+          </div>
+
+          <div class="component-card">
+            <div class="component-icon">📱</div>
+            <h3>IR Communication System</h3>
+            <p>Draadloos input systeem voor finale code invoer met NEC protocol ondersteuning</p>
+            <div class="component-details">
+              <h4>Technische Specificaties:</h4>
+              <ul>
+                <li><strong>Receiver Pin:</strong> Pin 8 (interrupt capable voor real-time decoding)</li>
+                <li><strong>Library:</strong> IRremote.h met LED feedback ondersteuning</li>
+                <li><strong>Protocol:</strong> NEC infrared protocol (38kHz carrier)</li>
+                <li><strong>Timeout:</strong> 8 seconde restart timer voor betrouwbare operatie</li>
+                <li><strong>Validation:</strong> Hexadecimale code matching tegen lookup table</li>
+              </ul>
+              <h4>Code Validation Logic:</h4>
+              <p>Ontvangen IR codes worden gematcht tegen de <code>hexCombo[]</code> array met bekende remote button
+                waarden. De <code>IndexVan()</code> functie vindt de numerieke waarde, <code>ZitInArray()</code>
+                controleert of deze in de correcte set zit. Success counter <code>z</code> wordt geïncrementeerd bij
+                matches.</p>
             </div>
           </div>
         </div>
-      </section>
 
-      <section id="components" class="components">
-        <div class="container">
-          <h2 class="section-title">Technical Components</h2>
-          <div class="components-grid">
-            <div class="component-card">
-              <div class="component-icon">🔢</div>
-              <h3>7-Segment Display</h3>
-              <p>Tracks elapsed time during the escape room challenge</p>
+        <div class="system-architecture">
+          <h3>🏗️ Systeem Architectuur</h3>
+          <div class="architecture-explanation">
+            <p>De <strong>Cube of Secrets</strong> gebruikt een modulaire architectuur waarbij elk component een
+              specifieke rol vervult in de game loop. Het Arduino Uno fungeert als centrale verwerkingseenheid die alle
+              inputs en outputs coördineert.</p>
+
+            <div class="architecture-flow">
+              <div class="flow-step">
+                <h4>Input Layer</h4>
+                <p>TCS230 sensor + Arcade buttons + IR receiver</p>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step">
+                <h4>Processing Layer</h4>
+                <p>Arduino Uno met custom game logic</p>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step">
+                <h4>Output Layer</h4>
+                <p>LCD display + Buzzer + 7-segment timer</p>
+              </div>
             </div>
-            <div class="component-card">
-              <div class="component-icon">📺</div>
-              <h3>LCD Display</h3>
-              <p>Shows questions and clues with color-based answers</p>
-            </div>
-            <div class="component-card">
-              <div class="component-icon">🎨</div>
-              <h3>Color Sensor</h3>
-              <p>Detects color cards when held in front of the sensor</p>
-            </div>
-            <div class="component-card">
-              <div class="component-icon">🔴</div>
-              <h3>5 Colored Buttons</h3>
-              <p>Physical push buttons in different colors for interaction</p>
-            </div>
-            <div class="component-card">
-              <div class="component-icon">🔊</div>
-              <h3>Buzzer</h3>
-              <p>Plays Morse code numbers when correct combinations are used</p>
-            </div>
-            <div class="component-card">
-              <div class="component-icon">📱</div>
-              <h3>IR Remote</h3>
-              <p>Used to input the decoded numbers in the correct sequence</p>
-            </div>
+
+            <p>De software architectuur gebruikt event-driven programming waarbij elk component reageert op specifieke
+              triggers. Random number generation zorgt voor replay value, terwijl state management ervoor zorgt dat het
+              spel logisch verloopt van start tot finish.</p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="demo" class="demo">
-        <div class="container">
-          <h2 class="section-title">Interactive Color Demo</h2>
-          <p>
-            Click on the colored buttons below to see a simulation of the Morse
-            code output!
-          </p>
+    <section id="galerij" class="section gallery">
+      <div class="container">
+        <h2 class="section-title">Project Ontwikkeling Galerij</h2>
 
-          <div class="color-buttons">
-            <button
-              class="color-btn red"
-              data-morse="....- "
-              data-number="4"
-            ></button>
-            <button
-              class="color-btn blue"
-              data-morse="...-- "
-              data-number="3"
-            ></button>
-            <button
-              class="color-btn green"
-              data-morse=".---- "
-              data-number="1"
-            ></button>
-            <button
-              class="color-btn yellow"
-              data-morse="..--- "
-              data-number="2"
-            ></button>
-            <button
-              class="color-btn purple"
-              data-morse="..... "
-              data-number="5"
-            ></button>
+        <div class="slideshow-container">
+          <!-- Eindresultaat foto's -->
+          <div class="slide active">
+            <img src="./public/end/1.jpg" alt="Voltooide Cube of Secrets - Bovenaanzicht" loading="lazy">
           </div>
 
-          <div class="morse-display" id="morseDisplay">
-            Click a color button to see Morse code!
+          <div class="slide">
+            <img src="./public/end/2.jpg" alt="Systeem Interface - Actieve Staat" loading="lazy">
           </div>
+
+          <div class="slide">
+            <img src="./public/end/3.jpg" alt="Timer Display - Gameplay Monitoring" loading="lazy">
+          </div>
+
+          <div class="slide">
+            <img src="./public/end/4.jpg" alt="Kleurrijke Button Interface" loading="lazy">
+          </div>
+
+          <!-- Ontwikkelingsfoto's -->
+          <div class="slide">
+            <img src="./public/image5.png" alt="Prototyping Fase - Component Layout" loading="lazy">
+          </div>
+
+          <div class="slide">
+            <img src="./public/image6.png" alt="Interne Hardware - TCS230 Sensor" loading="lazy">
+          </div>
+
+          <div class="slide">
+            <img src="./public/image7.png" alt="TCS230 Sensor Wiring Schema" loading="lazy">
+          </div>
+
+          <div class="slide">
+            <img src="./public/image8.png" alt="LCD Display Wiring Diagram" loading="lazy">
+          </div>
+
+          <div class="slide">
+            <img src="./public/image9.png" alt="3D Design - Basis Structuur" loading="lazy">
+          </div>
+
+          <div class="slide">
+            <img src="./public/image10.jpg" alt="3D Model - Complete Assembly" loading="lazy">
+          </div>
+
+          <div class="slide">
+            <img src="./public/image11.jpg" alt="3D Render - Perspectief View" loading="lazy">
+          </div>
+
+          <div class="slide">
+            <img src="./public/image12.jpg" alt="Hardware Assembly - Component Testing" loading="lazy">
+          </div>
+
+          <div class="slide">
+            <img src="./public/image13.jpg" alt="Full System Integration" loading="lazy">
+          </div>
+
+          <div class="slide">
+            <img src="./public/image14.jpg" alt="Breadboard Prototyping Setup" loading="lazy">
+          </div>
+
+          <button class="nav-btn prev" onclick="changeSlide(-1)" aria-label="Vorige foto">❮</button>
+          <button class="nav-btn next" onclick="changeSlide(1)" aria-label="Volgende foto">❯</button>
         </div>
-      </section>
 
-      <section id="progress" class="progress">
-        <div class="container">
-          <h2 class="section-title">Development Progress</h2>
+        <div class="dots-container">
+          <span class="dot active" onclick="currentSlide(1)" aria-label="Foto 1"></span>
+          <span class="dot" onclick="currentSlide(2)" aria-label="Foto 2"></span>
+          <span class="dot" onclick="currentSlide(3)" aria-label="Foto 3"></span>
+          <span class="dot" onclick="currentSlide(4)" aria-label="Foto 4"></span>
+          <span class="dot" onclick="currentSlide(5)" aria-label="Foto 5"></span>
+          <span class="dot" onclick="currentSlide(6)" aria-label="Foto 6"></span>
+          <span class="dot" onclick="currentSlide(7)" aria-label="Foto 7"></span>
+          <span class="dot" onclick="currentSlide(8)" aria-label="Foto 8"></span>
+          <span class="dot" onclick="currentSlide(9)" aria-label="Foto 9"></span>
+          <span class="dot" onclick="currentSlide(10)" aria-label="Foto 10"></span>
+          <span class="dot" onclick="currentSlide(11)" aria-label="Foto 11"></span>
+          <span class="dot" onclick="currentSlide(12)" aria-label="Foto 12"></span>
+          <span class="dot" onclick="currentSlide(13)" aria-label="Foto 13"></span>
+          <span class="dot" onclick="currentSlide(14)" aria-label="Foto 14"></span>
+        </div>
+      </div>
+    </section>
 
-          <div class="progress-item">
-            <h3>Hardware Setup (Complete)</h3>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 100%"></div>
-            </div>
-            <p>
-              Arduino, displays, sensors, and buttons are connected and tested.
+    <section id="team" class="section team">
+      <div class="container">
+        <h2 class="section-title">Ontwikkelteam Groep 25</h2>
+        <p class="team-intro">Ons diverse team van zes studenten heeft elk hun expertise bijgedragen aan dit innovatieve
+          project</p>
+
+        <div class="team-members">
+          <div class="team-member">
+            <div class="member-icon">👤</div>
+            <h3>Teamlid 1</h3>
+            <p class="role">Hardware Engineering</p>
+            <p class="description">Verantwoordelijk voor circuit design, component selectie en elektrische verbindingen
             </p>
           </div>
-
-          <div class="progress-item">
-            <h3>Color Detection System (In Progress)</h3>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 75%"></div>
-            </div>
-            <p>Color sensor calibration and card recognition functionality.</p>
+          <div class="team-member">
+            <div class="member-icon">👤</div>
+            <h3>Teamlid 2</h3>
+            <p class="role">Software Development</p>
+            <p class="description">Arduino programmering, morse code implementatie en game logic ontwikkeling</p>
           </div>
-
-          <div class="progress-item">
-            <h3>Morse Code Generator (In Progress)</h3>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 60%"></div>
-            </div>
-            <p>Buzzer system for playing Morse code numbers.</p>
+          <div class="team-member">
+            <div class="member-icon">👤</div>
+            <h3>Teamlid 3</h3>
+            <p class="role">3D Design & Manufacturing</p>
+            <p class="description">Behuizing ontwerp, 3D modeling en fysieke constructie van de escape room</p>
           </div>
-
-          <div class="progress-item">
-            <h3>Question Database (Planned)</h3>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 30%"></div>
-            </div>
-            <p>Creating variety of questions for replayability.</p>
+          <div class="team-member">
+            <div class="member-icon">👤</div>
+            <h3>Teamlid 4</h3>
+            <p class="role">Quality Assurance</p>
+            <p class="description">Systematisch testen, debugging en kwaliteitscontrole van alle systemen</p>
           </div>
-
-          <div class="progress-item">
-            <h3>IR Remote Integration (Planned)</h3>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 20%"></div>
-            </div>
-            <p>Programming remote control for number input system.</p>
+          <div class="team-member">
+            <div class="member-icon">👤</div>
+            <h3>Teamlid 5</h3>
+            <p class="role">Game Design</p>
+            <p class="description">User experience design, puzzle ontwerp en gameplay balancering</p>
+          </div>
+          <div class="team-member">
+            <div class="member-icon">👤</div>
+            <h3>Teamlid 6</h3>
+            <p class="role">Documentation & Web</p>
+            <p class="description">Technische documentatie, website ontwikkeling en project presentatie</p>
           </div>
         </div>
-      </section>
-    </main>
 
-    <footer>
-      <div class="container">
-        <p>
-          &copy; 2025 Cube of Secrets Project. Built with Arduino and
-          creativity! 🚀
-        </p>
+        <div class="project-stats">
+          <div class="stat">
+            <h3>150+</h3>
+            <p>Regels Arduino Code</p>
+          </div>
+          <div class="stat">
+            <h3>6</h3>
+            <p>Team Members</p>
+          </div>
+          <div class="stat">
+            <h3>12</h3>
+            <p>Weken Ontwikkeling</p>
+          </div>
+          <div class="stat">
+            <h3>100%</h3>
+            <p>Functioneel</p>
+          </div>
+        </div>
       </div>
-    </footer>
-  </body>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Cube of Secrets</h3>
+          <p>Hackathon Project 2025 - Groep 25</p>
+          <p>Odisee Hogeschool - Campus Gent</p>
+        </div>
+        <div class="footer-section">
+          <h3>Technologieën</h3>
+          <p>Arduino Uno, VMA501 Kit, C++</p>
+          <p>HTML5, CSS3, JavaScript</p>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p>Voor vragen over dit project:</p>
+          <p>hackathon@odisee.be</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Cube of Secrets - Alle rechten voorbehouden 🚀</p>
+      </div>
+    </div>
+  </footer>
+
   <script src="script.js"></script>
+</body>
+
 </html>
